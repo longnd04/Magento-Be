@@ -29,5 +29,8 @@
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="entity_id"/>
         </constraint>
+        <constraint xsi:type="unique" referenceId="AHT_BRAND_NAME">
+            <column name="entity_id"/>
+        </constraint>
     </table>
 </schema>
