@@ -1,9 +1,9 @@
 <?php
-namespace Aht\Demo\Model\Product;
+namespace Aht\Demo\Model;
 
-class Product extends \Magento\Framework\Model\AbstractModel implements \Magento\Framework\DataObject\IdentityInterface
+class BrandRepository extends \Magento\Framework\Model\AbstractModel implements \Magento\Framework\DataObject\IdentityInterface
 {
-    const CACHE_TAG = 'aht_demo_product';
+    const CACHE_TAG = 'aht_demo_brand_repository';
 
     /**
      * Model cache tag for clear cache in after save and after delete
@@ -17,7 +17,7 @@ class Product extends \Magento\Framework\Model\AbstractModel implements \Magento
      *
      * @var string
      */
-    protected $_eventPrefix = 'product';
+    protected $_eventPrefix = 'brand_repository';
 
     /**
      * @param \Magento\Framework\Model\Context $context
@@ -43,7 +43,7 @@ class Product extends \Magento\Framework\Model\AbstractModel implements \Magento
      */
     protected function _construct()
     {
-        $this->_init('Aht\Demo\Model\ResourceModel\Product');
+        $this->_init('Aht\Demo\Model\ResourceModel\BrandRepository');
     }
 
     /**

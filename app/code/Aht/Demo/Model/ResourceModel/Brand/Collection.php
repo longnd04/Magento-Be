@@ -1,11 +1,11 @@
 <?php
-namespace Aht\Demo\Model\ResourceModel\Product;
+namespace Aht\Demo\Model\ResourceModel\Brand;
 
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
     protected $_idFieldName = 'entity_id';
-    protected $_eventPrefix = 'aht_demo_product_collection';
-    protected $_eventObject = 'product_collection';
+    protected $_eventPrefix = 'aht_demo_brand_collection';
+    protected $_eventObject = 'brand_collection';
 
     /**
      * Define the resource model & the model.
@@ -14,6 +14,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     protected function _construct()
     {
-        $this->_init('Aht\Demo\Model\Product', 'Aht\Demo\Model\ResourceModel\Product');
+        $this->_init('Aht\Demo\Model\Brand', 'Aht\Demo\Model\ResourceModel\Brand');
     }
 }
