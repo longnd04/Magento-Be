@@ -1,6 +1,6 @@
 <?php
 
-namespace Aht\Demo\Controller\adminhtml\Demo;
+namespace Aht\Demo\Controller\Adminhtml\Demo;
 
 class index extends \Magento\Framework\App\Action\Action
 {
@@ -26,8 +26,6 @@ class index extends \Magento\Framework\App\Action\Action
      */
     public function execute()
     {
-        echo "Hello World";
-        die;
         return $this->_pageFactory->create();
     }
 }
