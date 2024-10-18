@@ -13,9 +13,9 @@ class BrandActions extends \Magento\Ui\Component\Listing\Columns\Column
 {
 
     protected $urlBuilder;
-    const URL_PATH_DELETE = 'aht_demo/demo/delete';
-    const URL_PATH_EDIT = 'aht_demo/demo/edit';
-    const URL_PATH_DETAILS = 'aht_demo/demo/details';
+    const URL_PATH_DELETE = 'aht/demo/delete';
+    const URL_PATH_EDIT = 'aht/demo/edit';
+    const URL_PATH_DETAILS = 'aht/demo/details';
 
     /**
      * @param \Magento\Framework\View\Element\UiComponent\ContextInterface $context
@@ -46,6 +46,7 @@ class BrandActions extends \Magento\Ui\Component\Listing\Columns\Column
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as &$item) {
                 if (isset($item['entity_id'])) {
+                    $name = isset($item['name']) ? $item['name'] : __('this item');
                     $item[$this->getData('name')] = [
                         'edit' => [
                             'href' => $this->urlBuilder->getUrl(
@@ -65,8 +66,8 @@ class BrandActions extends \Magento\Ui\Component\Listing\Columns\Column
                             ),
                             'label' => __('Delete'),
                             'confirm' => [
-                                'title' => __('Delete "${ $.$data.title }"'),
-                                'message' => __('Are you sure you wan\'t to delete a "${ $.$data.title }" record?')
+                                'title' => __('Delete "%1"', $name),
+                                'message' => __('Are you sure you want to delete "%1"?', $name)
                             ]
                         ]
                     ];
