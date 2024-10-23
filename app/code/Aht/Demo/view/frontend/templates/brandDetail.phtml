@@ -1,0 +1,28 @@
+<?php
+$getProductByBrand = $block->getProductByBrand();
+?>
+
+<?php if ($getProductByBrand && $getProductByBrand->getSize()): ?>
+    <div class="product-list">
+        <?php foreach ($getProductByBrand as $product): ?>
+            <div class="product-item">
+                <div class="product-image">
+                    <img src="<?php echo $block->getImageUrl($product); ?>" alt="<?php echo $block->escapeHtml($product->getName()); ?>" />
+                </div>
+                <div class="product-info">
+                    <h2><?php echo $block->escapeHtml($product->getName()); ?></h2>
+                    <p><?php echo $block->escapeHtml($product->getPrice()); ?> <span> $</span></p>
+                    <div class="brand-name"> <span>Brand name:</span>
+                        <?php
+                        if ($product->getCustomAttribute('brand') !== null) {
+                            echo $product->getAttributeText('brand');
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+<?php else: ?>
+    <p><?php echo __('No products found for this brand.'); ?></p>
+<?php endif; ?>
