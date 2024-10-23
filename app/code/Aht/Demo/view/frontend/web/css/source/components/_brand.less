@@ -1,0 +1,58 @@
+.aht-demo-index {
+    .page-wrapper {
+        .page-main {
+            .columns {
+                .column.main {
+                    .title-brand {
+                        padding: 20px 0;
+                        font-size: 32px;
+                        font-weight: 600;
+                    }
+
+                    .brand-list {
+                        width: 100%;
+                        display: flex;
+                        gap: 24px;
+                        cursor: pointer;
+
+
+                        .brand-item {
+                            width: ~'calc((100% - 72px)/ 4)';
+                            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+                            border-radius: 8px;
+                            transition: transform 0.2s ease;
+
+                            &:hover {
+                                transform: scale(1.05);
+                            }
+
+                            .brand-info {
+                                padding: 12px;
+
+                                h2 {
+                                    font-size: 20px;
+                                    font-weight: 600;
+                                }
+
+                                p {
+                                    font-size: 14px;
+                                    font-weight: 400;
+                                    color: gray;
+                                }
+                            }
+
+                            .brand-logo {
+                                img {
+                                    border-top-left-radius: 8px;
+                                    border-top-right-radius: 8px;
+                                    height: 150px;
+                                    object-fit: cover;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
