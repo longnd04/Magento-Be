@@ -1,0 +1,21 @@
+<?php
+$brands = $block->getBrands();
+?>
+
+<?php if ($brands->getSize()): ?>
+    <div class="brand-list">
+        <?php foreach ($brands as $brand): ?>
+            <div class="brand-item">
+                <div class="brand-logo">
+                    <img src="<?php echo $block->getBaseUrl() . '../media/aht/demo/' . $brand->getLogo(); ?>" alt="<?php echo $block->escapeHtml($brand->getName()); ?>" />
+                </div>
+                <div class="brand-info">
+                    <h2><?php echo $block->escapeHtml($brand->getName()); ?></h2>
+                    <p><?php echo $block->escapeHtml($brand->getDescription()); ?></p>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+<?php else: ?>
+    <p><?php echo __('No brands available.'); ?></p>
+<?php endif; ?>

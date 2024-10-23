@@ -21,7 +21,7 @@ class UpgradeData implements UpgradeDataInterface
             $data = [
                 'name' => "It is Test Upgrade Data",
                 'description' => "t is Test's description Upgrade Data",
-                'images' => "test.jpg Upgrade Data",
+                'logo' => "test.jpg Upgrade Data",
             ];
             $post = $this->_postFactory->create();
             $post->addData($data)->save();
