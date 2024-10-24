@@ -1,0 +1,14 @@
+{
+    "aht_brand": {
+        "column": {
+            "entity_id": true,
+            "name": true,
+            "description": true,
+            "logo": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AHT_BRAND_ENTITY_ID": true
+        }
+    }
+}

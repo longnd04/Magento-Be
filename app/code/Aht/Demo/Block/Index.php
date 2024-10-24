@@ -20,11 +20,6 @@ class Index extends Template
 
     public function getBrands()
     {
-        if (!$this->hasData('brands')) {
-            $brandCollection = $this->brandCollectionFactory->create();
-            $brandCollection->addFieldToSelect('*');
-            $this->setData('brands', $brandCollection);
-        }
-        return $this->getData('brands');
+        return $this->brandCollectionFactory->create();
     }
 }
