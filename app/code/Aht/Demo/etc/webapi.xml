@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+	<route url="/V1/aht-demo/brand" method="POST">
+		<service class="Aht\Demo\Api\BrandRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Aht_Demo::Brand_save"/>
+		</resources>
+	</route>
+	<route url="/V1/aht-demo/brand/search" method="GET">
+		<service class="Aht\Demo\Api\BrandRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="Aht_Demo::Brand_view"/>
+		</resources>
+	</route>
+	<route url="/V1/aht-demo/brand/:brandId" method="GET">
+		<service class="Aht\Demo\Api\BrandRepositoryInterface" method="get"/>
+		<resources>
+			<resource ref="Aht_Demo::Brand_view"/>
+		</resources>
+	</route>
+	<route url="/V1/aht-demo/brand/:brandId" method="PUT">
+		<service class="Aht\Demo\Api\BrandRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Aht_Demo::Brand_update"/>
+		</resources>
+	</route>
+	<route url="/V1/aht-demo/brand/:brandId" method="DELETE">
+		<service class="Aht\Demo\Api\BrandRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="Aht_Demo::Brand_delete"/>
+		</resources>
+	</route>
+</routes>

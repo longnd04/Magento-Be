@@ -2,34 +2,38 @@
 
 namespace Aht\Demo\Controller\Adminhtml\Demo;
 
-use Aht\Demo\Model\BrandFactory;
+use Aht\Demo\Api\BrandRepositoryInterface;
 use Magento\Backend\App\Action;
 use Aht\Demo\Model\Brand\ImageUploader;
+use Aht\Demo\Model\BrandFactory;
 
 class Save extends Action
 {
     private $postFactory;
     protected $imageUploader;
-
+    protected $brandRepository;
+    protected $brandFactory;
     public function __construct(
         Action\Context $context,
-        BrandFactory $postFactory,
+        BrandRepositoryInterface $brandRepository,
+        BrandFactory $brandFactory,
         ImageUploader $imageUploader
     ) {
         parent::__construct($context);
-        $this->postFactory = $postFactory;
+        $this->brandRepository = $brandRepository;
         $this->imageUploader = $imageUploader;
+        $this->brandFactory = $brandFactory;
     }
     public function execute()
     {
         $data = $this->getRequest()->getPostValue();
         $id = !empty($data['entity_id']) ? $data['entity_id'] : null;
-        $post = $this->postFactory->create();
+
+        $post = $this->brandFactory->create();
 
         if ($id) {
             $post->load($id);
         }
-
         try {
             $logo = $data['logo']['value'] ?? '';
             $logoName = $data['logo'][0]['name'] ?? false;
@@ -37,18 +41,15 @@ class Save extends Action
                 $logo = $this->imageUploader->moveFileFromTmp($logoName);
             }
 
-            $newData = [
-                'name' => $data['name'],
-                'description' => $data['description'],
-                'logo' => $logo,
-            ];
-
-            $post->addData($newData);
-            $post->save();
-            $this->messageManager->addSuccessMessage(__('You saved the post.'));
+            $post->setName($data['name']);
+            $post->setDescription($data['description']);
+            $post->setLogo($logo);
+            $this->brandRepository->save($post);
+            $this->messageManager->addSuccessMessage(__('You saved the brand.'));
         } catch (\Exception $e) {
             $this->messageManager->addErrorMessage(__($e->getMessage()));
         }
+
         return $this->resultRedirectFactory->create()->setPath('aht/demo/index');
     }
 }

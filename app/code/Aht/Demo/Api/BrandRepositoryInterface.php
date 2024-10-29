@@ -1,18 +1,57 @@
 <?php
+/**
+ * Copyright ©  All rights reserved.
+ * See COPYING.txt for license details.
+ */
+declare(strict_types=1);
 
 namespace Aht\Demo\Api;
 
+use Magento\Framework\Api\SearchCriteriaInterface;
+
 interface BrandRepositoryInterface
 {
-    public function getAllBrand();
 
-    public function getById(String $id);
-
-    public function createBrand(\Aht\Demo\Api\Data\BrandInterface $data);
-
-    public function updateBrand(String $id, \Aht\Demo\Api\Data\BrandInterface $data);
-
+    /**
+     * Save Brand
+     * @param \Aht\Demo\Api\Data\BrandInterface $brand
+     * @return \Aht\Demo\Api\Data\BrandInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
     public function save(\Aht\Demo\Api\Data\BrandInterface $brand);
 
-    public function delete(String $id);
+    /**
+     * Retrieve Brand
+     * @param string $brandId
+     * @return \Aht\Demo\Api\Data\BrandInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function get($brandId);
+
+    /**
+     * Retrieve Brand matching the specified criteria.
+     * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+     * @return \Aht\Demo\Api\Data\BrandSearchResultsInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function getList(
+        \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+    );
+
+    /**
+     * Delete Brand
+     * @param \Aht\Demo\Api\Data\BrandInterface $brand
+     * @return bool true on success
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function delete(\Aht\Demo\Api\Data\BrandInterface $brand);
+
+    /**
+     * Delete Brand by ID
+     * @param string $brandId
+     * @return bool true on success
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function deleteById($brandId);
 }

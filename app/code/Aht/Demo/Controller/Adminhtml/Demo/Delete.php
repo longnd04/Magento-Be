@@ -1,16 +1,35 @@
 <?php
 
-/**
- * Copyright ©  All rights reserved.
- * See COPYING.txt for license details.
- */
-
 declare(strict_types=1);
 
 namespace Aht\Demo\Controller\Adminhtml\Demo;
 
-class Delete extends \Aht\Demo\Controller\Adminhtml\Brand
+use Aht\Demo\Api\BrandRepositoryInterface;
+use Magento\Backend\App\Action\Context;
+use Magento\Framework\Controller\Result\RedirectFactory;
+use Magento\Framework\Registry;
+
+class Delete extends \Aht\Demo\Controller\Adminhtml\Brand 
 {
+    /**
+     * @var BrandRepositoryInterface
+     */
+    protected $brandRepository;
+
+    /**
+     * Delete constructor.
+     *
+     * @param Context $context
+     * @param BrandRepositoryInterface $brandRepository
+     */
+    public function __construct(
+        Context $context,
+        BrandRepositoryInterface $brandRepository,
+        Registry $coreRegistry
+    ) {
+        parent::__construct($context, $coreRegistry);
+        $this->brandRepository = $brandRepository;
+    }
 
     /**
      * Delete action
@@ -21,28 +40,21 @@ class Delete extends \Aht\Demo\Controller\Adminhtml\Brand
     {
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();
-        // check if we know what should be deleted
         $id = $this->getRequest()->getParam('entity_id');
+
         if ($id) {
             try {
-                // init model and delete
-                $model = $this->_objectManager->create(\Aht\Demo\Model\Brand::class);
-                $model->load($id);
-                $model->delete();
-                // display success message
+                // Xóa brand thông qua BrandRepository
+                $this->brandRepository->deleteById($id);
                 $this->messageManager->addSuccessMessage(__('You deleted the Brand.'));
-                // go to grid
                 return $resultRedirect->setPath('*/*/');
             } catch (\Exception $e) {
-                // display error message
                 $this->messageManager->addErrorMessage($e->getMessage());
-                // go back to edit form
                 return $resultRedirect->setPath('*/*/edit', ['entity_id' => $id]);
             }
         }
-        // display error message
+
         $this->messageManager->addErrorMessage(__('We can\'t find a Brand to delete.'));
-        // go to grid
         return $resultRedirect->setPath('*/*/');
     }
 }

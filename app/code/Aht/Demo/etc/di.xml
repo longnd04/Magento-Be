@@ -13,4 +13,6 @@
             </argument>
         </arguments>
     </type>
+    <preference for="Aht\Demo\Api\Data\BrandInterface" type="Aht\Demo\Model\Brand" />
+    <preference for="Aht\Demo\Api\BrandRepositoryInterface" type="Aht\Demo\Model\BrandRepository" />
 </config>
