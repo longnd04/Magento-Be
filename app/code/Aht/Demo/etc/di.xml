@@ -15,4 +15,7 @@
     </type>
     <preference for="Aht\Demo\Api\Data\BrandInterface" type="Aht\Demo\Model\Brand" />
     <preference for="Aht\Demo\Api\BrandRepositoryInterface" type="Aht\Demo\Model\BrandRepository" />
+    <type name="Aht\Demo\Api\BrandRepositoryInterface">
+        <plugin name="add_before" type="Aht\Demo\Plugin\Before" sortOrder="10"/>
+    </type>
 </config>

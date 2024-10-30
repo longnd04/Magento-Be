@@ -6,8 +6,8 @@ namespace Aht\Demo\Controller\Adminhtml\Demo;
 
 use Aht\Demo\Api\BrandRepositoryInterface;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\Controller\Result\RedirectFactory;
 use Magento\Framework\Registry;
+use Magento\Framework\Event\ManagerInterface;
 
 class Delete extends \Aht\Demo\Controller\Adminhtml\Brand 
 {
@@ -15,6 +15,8 @@ class Delete extends \Aht\Demo\Controller\Adminhtml\Brand
      * @var BrandRepositoryInterface
      */
     protected $brandRepository;
+    
+    protected $eventManager; 
 
     /**
      * Delete constructor.
@@ -25,10 +27,13 @@ class Delete extends \Aht\Demo\Controller\Adminhtml\Brand
     public function __construct(
         Context $context,
         BrandRepositoryInterface $brandRepository,
-        Registry $coreRegistry
+        Registry $coreRegistry,
+        ManagerInterface $eventManager, 
+
     ) {
         parent::__construct($context, $coreRegistry);
         $this->brandRepository = $brandRepository;
+        $this->eventManager = $eventManager;
     }
 
     /**
@@ -44,8 +49,10 @@ class Delete extends \Aht\Demo\Controller\Adminhtml\Brand
 
         if ($id) {
             try {
-                // Xóa brand thông qua BrandRepository
+                $brand = $this->brandRepository->get($id);
                 $this->brandRepository->deleteById($id);
+                $this->eventManager->dispatch('custom_aht_delete', ['brand' => $brand]);
+
                 $this->messageManager->addSuccessMessage(__('You deleted the Brand.'));
                 return $resultRedirect->setPath('*/*/');
             } catch (\Exception $e) {

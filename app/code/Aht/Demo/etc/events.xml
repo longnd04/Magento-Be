@@ -1,0 +1,8 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="custom_aht_delete">
+        <observer name="after_delete_product" instance="Aht\Demo\Observer\DeleteProductObserver"/>
+    </event>
+    <event name="customer_register_success">
+        <observer name="customer_register_success" instance="Aht\Demo\Observer\CustomerObserver"/>
+    </event>
+</config>
